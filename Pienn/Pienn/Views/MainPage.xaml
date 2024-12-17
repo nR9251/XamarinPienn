@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:Pienn.ViewModels" 
+             xmlns:model="clr-namespace:Pienn.Models"
+             x:Class="Pienn.Views.MainPage"
+             Title="清單">
+    <ContentPage.BindingContext>
+        <viewmodels:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="計算"         
+                     Command="{Binding CaculateCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ListView x:Name="trips"
+                  SelectionMode="Single"
+                  ItemSelected="Trips_ItemSelected"
+                  ItemsSource="{Binding GoodsEntries}"
+                  RowHeight="100"
+                  >
+            <!--單一選取-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout>
+                                <Image Source="{Binding Source}" />
+                            </StackLayout>
+                            <StackLayout>
+                                <Label Grid.Column="1"
+                                       Text="{Binding Title}"
+                                       FontAttributes="Bold" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Grid.Column="1"
+                                       x:Name="goodsPrice"
+                                           Grid.Row="1"
+                                           Text="{Binding Price}" />
+                                    <Label Text="　　　　　" />
+                                    <StackLayout Orientation="Vertical"
+                                         HorizontalOptions="EndAndExpand"
+                                         VerticalOptions="EndAndExpand">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label x:Name="NumValueLabel"
+                                                   Grid.Column="1"
+                                                   Text="{Binding Value, StringFormat=數量：\{0\}, Source={Reference Name=Numstepper}}" />
+                                        </StackLayout>
+                                        <StackLayout>
+                                            <Stepper x:Name="Numstepper"
+                                                     Minimum="0"
+                                                     Maximum="12"
+                                                     Increment="1"
+                                                     Value="{Binding Num, Mode=TwoWay}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

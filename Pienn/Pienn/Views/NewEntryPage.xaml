@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:Pienn.ViewModels"
+             Title="新增商品"
+             x:Class="Pienn.Views.NewEntryPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:NewEntryViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+            </Grid>
+            <StackLayout Orientation="Horizontal">
+                <Label FontSize="18" Text="商品名：" />
+                <Entry x:Name="inputTitle" FontSize="18" Placeholder="請輸入商品名" Text="{Binding NewEntry.Title}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label FontSize="18" Text="商品圖片：" />
+                <Button Text="選取圖片" FontSize="18"
+                        Clicked="OnPickPhotoButtonClicked" />
+                <Image x:Name="image"
+                       Source="{Binding NewEntry.Source}"
+                       WidthRequest="100"
+                       HeightRequest="100"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label FontSize="18" Text="價格：" />
+                <Entry Placeholder="請輸入價格" FontSize="18" Text="{Binding NewEntry.Price}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label FontSize="18" Text="備註：" />
+                <Entry Placeholder="請輸入商品網址" FontSize="18" Text="{Binding NewEntry.Remark}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
